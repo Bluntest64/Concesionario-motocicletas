@@ -10,7 +10,9 @@ def listar():
     precio   = request.args.get('precio_max', '')
     estado   = request.args.get('estado', '')
     vehiculos = Vehiculo.obtener_todos(marca, modelo, precio or None, estado or None)
-    return "ENTRO VEHICULOS"
+    return render_template('vehiculos/lista.html', vehiculos=vehiculos,
+                           filtros={'marca': marca, 'modelo': modelo,
+                                    'precio_max': precio, 'estado': estado})
 
 @vehiculo_bp.route('/nuevo', methods=['GET', 'POST'])
 def nuevo():
